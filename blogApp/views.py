@@ -13,7 +13,10 @@ def post_detail(request):
 
 
 def post_list(request):
-    return HttpResponse("list")
+    context = {
+        "Title": "List"
+    }
+    return render(request,"index.html",context)
 
 
 def post_update(request):
