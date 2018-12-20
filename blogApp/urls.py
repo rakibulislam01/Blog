@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-
+# This is For check
 urlpatterns = [
     path('create/', views.post_create),
     path('detail/', views.post_detail),
