@@ -1,12 +1,13 @@
 from django.urls import path
 from . import views
+from django.conf.urls import url
 
 # This is For check
 urlpatterns = [
-    path('create/', views.post_create),
-    path('detail/', views.post_detail),
-    path('postlist/', views.post_list),
-    path('update/', views.post_update),
-    path('delete/', views.post_delete),
+    url('create/', views.post_create),
+    url(r'^(?P<id>\d+)/$', views.post_detail),
+    url('postlist/', views.post_list),
+    url('update/', views.post_update),
+    url('delete/', views.post_delete),
     # path('jango', views.index, name='jango'),
 ]

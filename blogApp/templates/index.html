@@ -6,10 +6,10 @@
 </head>
 <body>
     <h1>{{Title}} working!</h1>
-    <h1>{{post}}</h1>
+
     {% for obj in object_list %}
+    <a href="/blogApp/{{obj.id}}/">{{ obj.title}} </a><br/>
     {{ obj.id}} <br/>
-    {{ obj.title}} <br/>
     {{ obj.content}} <br/>
     {{ obj.timestamp}} <br/>
     {{ obj.update}} <br/>

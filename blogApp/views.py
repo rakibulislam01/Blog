@@ -9,8 +9,8 @@ def post_create(request):
     return HttpResponse("Create")
 
 
-def post_detail(request):
-    instance = get_object_or_404(Post, id = 3)
+def post_detail(request, id):
+    instance = get_object_or_404(Post, id = id)
     # instance = Post.objects.get(id = 1)
     context = {
         "title": instance.title,
@@ -22,7 +22,7 @@ def post_detail(request):
 def post_list(request):
     queryset = Post.objects.all()
     context = {
-        "Title": "It's working",
+        "Title": "",
         "object_list": queryset,
         }
 
