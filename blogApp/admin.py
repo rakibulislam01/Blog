@@ -3,8 +3,10 @@ from .models import Post
 
 #fake chencge
 # Register your models here.
+
+
 class PostModelAdmin(admin.ModelAdmin):
-    list_display            = ['title', 'tiemstamp', 'updated']
+    list_display            = ['title', 'timestamp', 'updated']
     list_display_links      = ['updated']
     list_filter             = ['updated', 'title']
     search_fields           = ['title', 'content']
