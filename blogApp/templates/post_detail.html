@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+    <title> {% block head_title %} {{instance.title}} | {{ block.super }} {% endblock head_title %} </title>
+
+
+    <style>
+        {% block style %}
+        h1{
+            color: #777777
+        }
+
+        {% endblock style %}
+    </style>
+
+{% block content %}
+
     <h1>{{title}}</h1>
 
     {{ instance.id}} <br/>
@@ -13,6 +22,4 @@
     {{ instance.timestamp}} <br/>
     {{ instance.update}} <br/>
 
-
-</body>
-</html>
+{% endblock content %}
