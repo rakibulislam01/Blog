@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post
 from .forms import PostForm
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -14,7 +15,7 @@ def post_create(request):
         instance = form.save(commit=False)
         # form.cleaned_data.get("")
         instance.save()
-        messages.success(request,"Successfully create")
+        messages.success(request, "Successfully create")
         return HttpResponseRedirect(instance.get_absolute_url())
     # else:
     #     messages.error(request,"Not Successfully create")
@@ -41,10 +42,16 @@ def post_detail(request, id):
 
 
 def post_list(request):
-    queryset = Post.objects.all()
+    queryset_list = Post.objects.all()  # .order_by("-timestamp")
+    paginator = Paginator(queryset_list, 10) # Show 25 contacts per page
+    page_request_var = "page"
+    page = request.GET.get(page_request_var)
+    queryset = paginator.get_page(page)
+
     context = {
-        "Title": "",
+        "Title": "Post List",
         "object_list": queryset,
+        "page_request_var": page_request_var,
     }
 
     # if request.user.is_authenticated:
@@ -58,9 +65,9 @@ def post_list(request):
     return render(request, "post_list.html", context)
 
 
-def post_update(request,id=None):
+def post_update(request, id=None):
     instance = get_object_or_404(Post, id=id)
-    form = PostForm(request.POST or None, instance = instance)
+    form = PostForm(request.POST or None, instance=instance)
 
     if form.is_valid():
         instance = form.save(commit=False)
@@ -72,15 +79,15 @@ def post_update(request,id=None):
     #     messages.error(request, "Not Successfully Saved")
 
     context = {
-        "title"     : instance.title,
-        "instance"  : instance,
-        "form"      : form
+        "title": instance.title,
+        "instance": instance,
+        "form": form
     }
 
     return render(request, "post_form.html", context)
 
 
-def post_delete(request, id = None):
+def post_delete(request, id=None):
     instance = get_object_or_404(Post, id=id)
     instance.delete()
     messages.success(request, "Successfully Delete")
