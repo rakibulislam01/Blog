@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import Post
 
-#fake chencge
 # Register your models here.
 
 
